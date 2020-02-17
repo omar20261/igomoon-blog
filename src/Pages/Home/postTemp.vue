@@ -1,0 +1,43 @@
+<template>
+  <a class="col-md-8 mb-3 p-3 d-inline-block blog-post" :href="PostItem.guid.rendered" target="_blank">
+    <h4>{{PostItem.title.rendered}}</h4>
+    <img src="../../assets/logo.png" alt="">
+    <p v-html="PostItem.excerpt.rendered">  </p>
+    <p class="date"> {{PostItem.date_gmt | moment("YYYY-MM-DD hh:mm A")}} </p>
+  </a>
+</template>
+
+<script>
+export default {
+  name: 'home-page',
+  mounted(){
+
+  },
+  props: ['PostItem',"index"],
+  data () {
+    return {
+
+    }
+  }
+}
+</script>
+
+<style>
+.blog-post{
+  border: 1px solid rgba(0,0,0,0.11);
+  -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+.blog-post:hover {
+  -webkit-transform: scale(1.25, 1.25);
+  transform: scale(1.25, 1.25);
+  background-color: #E3E3E3;;
+  z-index: 1;
+}
+.date{
+  float: left;
+  font-size: 15px;
+  color:rgb(115, 115, 115);
+}
+</style>
