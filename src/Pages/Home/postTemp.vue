@@ -1,7 +1,7 @@
 <template>
   <a class="col-md-8 mb-3 p-3 d-inline-block blog-post" :href="PostItem.guid.rendered" target="_blank">
     <h4>{{PostItem.title.rendered}}</h4>
-    <img src="../../assets/logo.png" alt="">
+    <img src="../../assets/default-img.png" alt="">
     <p v-html="PostItem.excerpt.rendered">  </p>
     <p class="date"> {{PostItem.date_gmt | moment("YYYY-MM-DD hh:mm A")}} </p>
   </a>
@@ -39,5 +39,8 @@ export default {
   float: left;
   font-size: 15px;
   color:rgb(115, 115, 115);
+}
+.blog-post img{
+  max-width: 700px;
 }
 </style>
