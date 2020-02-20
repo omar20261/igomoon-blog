@@ -18,11 +18,11 @@ export default {
   props: ['PostItem',"index"],
   data () {
     return {
-      image: '/dist/default-img.png',
+      image: './src/assets/default-img.png',
     }
   },
   methods:{
-    getFMedia:function(id) {
+    getFMedia:function(id) { // fetch featured_media URLs
       if(!id || id == 0){return;}
       let url = '/wp-json/wp/v2/media/'+id;
       API.callFun({method:'get',url:url,noloading:true}).then((d)=>{
@@ -41,8 +41,8 @@ export default {
   box-shadow: 0 1px 2px rgba(0,0,0,0.15);
 }
 .blog-post:hover {
-  -webkit-transform: scale(1.1, 1.1);
-  transform: scale(1.1, 1.1);
+  -webkit-transform: scale(1.05, 1.05);
+  transform: scale(1.05, 1.05);
   background-color: #E3E3E3;;
   z-index: 1;
 }
