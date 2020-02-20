@@ -1,7 +1,10 @@
 <template>
-  <div class="container text-center mt-5 posts">
+  <div class="container text-center my-5 posts">
     <h2>Posts List</h2>
     <post-template v-for="(PostItem, i) in PostsItems" :key="PostItem.id" :PostItem="PostItem" :index="i"/>
+    <div class="my-5 py-5" @click="MorePosts();" v-if="getMore&&!$store.state.G_loading">
+      <button class="btn btn-lg btn-primary col-md-5"> More </button>
+    </div>
   </div>
 </template>
 
@@ -20,14 +23,24 @@ export default {
   data () {
     return {
       PostsItems: [],
+      per_page:10,
+      currentPage:1,
+      getMore:false
     }
   },
   methods:{
     getPosts:function() {
-      API.callFun({method:'get',url:'/wp-json/wp/v2/posts'}).then((d)=>{
-        console.log(d.body)
-        if(d&&d.body){this.PostsItems=d.body}
+      let url = '/wp-json/wp/v2/posts?per_page='+this.per_page+'&offset='+(this.currentPage-1)*this.per_page;
+      API.callFun({method:'get',url:url}).then((d)=>{
+        if(d&&d.body){
+          this.getMore=d.body.length==this.per_page?true:false;
+          this.PostsItems=this.PostsItems.length?this.PostsItems.concat(d.body):d.body;
+        }
       })
+    },
+    MorePosts:function(){
+       this.currentPage++;
+       this.getPosts();
     }
   }
 }

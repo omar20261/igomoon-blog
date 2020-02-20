@@ -13,7 +13,7 @@ class API{
     if(params.method){params.method=params.method.toLowerCase();}
     if(params.method=='put'||params.method=='post'){ HttpFun = Vue.http[params.method](store.state.API_ENDPOINT+params.url,params.data,{headers})
     }else{HttpFun = Vue.http[params.method](store.state.API_ENDPOINT+params.url,{headers}) }
-    store.state.G_loading=true;
+    store.state.G_loading=!params.noloading;
     return HttpFun.catch((d)=>{
       store.state.G_loading=false;
       console.error(`status: ${d.status} - ${d.statusText} , ${JSON.stringify(d.body)}`, ' http error')
